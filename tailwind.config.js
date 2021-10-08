@@ -4,6 +4,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    flex: {
+      '3': '1 0 33%',
+      '4': '1 0 25%',
+    },
   },
   variants: {
     extend: {},
