@@ -16,7 +16,7 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
            {userAssets.assets.map((item, index) => (
                <div className='border h-96 w-60 rounded-t-xl'>
             <div className='h-60  rounded-t-xl'>
-                <img src={item.image_original_url} className='h-full w-full rounded-t-xl'/>
+                <img src={item.image_original_url ? item.image_original_url : item.asset_contract.image_url} className='h-full w-full rounded-t-xl'/>
             </div>
             <div className='h-36  flex flex-col border-b-2 border-black'>
                 

@@ -20,7 +20,7 @@ const [address, setAddress] = useState('0x7f1884d93061ed1f44b65d537e782781bc728d
         .then((response) => {
             setUserAssets(response.data)
             
-            console.log(userAssets)
+            
         })
         .catch((error) => {
           console.log(error)
@@ -28,14 +28,17 @@ const [address, setAddress] = useState('0x7f1884d93061ed1f44b65d537e782781bc728d
 }
 
 const getCollection = async () => {
-  setColl([])
+  
+  console.log(userAssets)
   userAssets.assets.map(async (item) => {
-    await axios.get(`https://api.opensea.io/api/v1/collections?asset_owner=${item.asset_contract.payout_address}&offset=0&limit=300`)
-      .then((response) => {
+    await axios.get(`https://api.opensea.io/api/v1/collections?asset_owner=${item.creator.address}&offset=0&limit=300`)
+      .then(async (response) => {
         console.log(response)
-        let newColl = response.data[0].stats.floor_price
+        let newColl = response.data[0].stats.floor_price ? response.data[0].stats.floor_price : 'n/a'
+        console.log(newColl)
         newColl === undefined ? 'N/A' : newColl = response.data[0].stats.floor_price
-        setColl(coll => [...coll, newColl])
+        await setColl(coll => [...coll, newColl])
+        console.log(coll)
         
       })
   })
@@ -58,7 +61,7 @@ const getCollection = async () => {
         setUserAssets={setUserAssets}
         getCollection={getCollection}
         coll={coll}
-        
+        setColl={setColl}
       />
       <div className='flex '>
         <SideMenu 

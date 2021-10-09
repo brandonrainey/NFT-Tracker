@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function TopMenu({gas, assets, eth, custom, setCustom, getAddress, userAssets, setUserAssets, setAddress, address, getCollection, coll}) {
+export default function TopMenu({gas, assets, eth, custom, setCustom, getAddress, userAssets, setUserAssets, setAddress, address, getCollection, coll, setColl}) {
     const [inputValue, setInputValue] = useState('')
     
 
@@ -10,15 +10,17 @@ export default function TopMenu({gas, assets, eth, custom, setCustom, getAddress
         setCustom(!custom)
         setAddress(inputValue)
         
-        console.log(userAssets)
-        console.log(coll)
+        
     }
 
     
-    useEffect(() => {
-        getAddress()
+    useEffect(async () => {
+        await getAddress()
+        setColl([])
         getCollection()
-    },[address])
+        
+        
+    },[custom])
     return (
 
         <div className='flex '>
