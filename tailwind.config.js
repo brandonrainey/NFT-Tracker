@@ -6,7 +6,7 @@ module.exports = {
     extend: {},
     flex: {
       '3': '1 0 33%',
-      '4': '1 0 25%',
+      '4': '0.9 0 25%',
     },
   },
   variants: {
