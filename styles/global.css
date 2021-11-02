@@ -23,6 +23,10 @@ html {
 }
 
 @media (max-width: 500px) {
+
+    html {
+        overflow-y: hidden;
+    }
     .paginationBar {
         position: initial;
     
