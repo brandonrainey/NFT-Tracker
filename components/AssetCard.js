@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import useSWR from 'swr'
 import Pagination from './Pagination'
+import LazyLoad from 'react-lazyload';
+import Loading from './Loading';
 
 const fetcher = (url) => {
     
@@ -11,6 +13,8 @@ const fetcher = (url) => {
 
 export default function AssetCard({gas, assets, collection, custom, setCustom, userAssets, address, coll}) {
     const topRef = useRef()
+
+    const [loading, setLoading] = useState(false)
 
     const scrollToTop = () =>{
         topRef.current.scrollIntoView({ block: 'start' })
@@ -22,8 +26,12 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
 
     const { data, error } = useSWR(`https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=${pageIndex}&limit=12`, fetcher)
 
+    // if (!error && !data) return setLoading(true)
+
       if (error) return <div>failed to load</div>
-      if (!data) return <div>loading...</div>
+      if (!data) return <Loading 
+                            type='spinningBubbles'
+                        />
       
     
 
@@ -40,7 +48,10 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
                 {data.assets.map((item, index) => (
             <div className='border w-60 rounded-t-xl rounded-xl shadow-xl descBackground'>
                 <div className='h-60  rounded-t-xl'>
-                    <img src={item.image_original_url ? item.image_original_url : item.asset_contract.image_url} className='h-full w-full rounded-t-xl'/>
+                        {/* <Loading style={{display: loading ? "block" : "none"}}/> */}
+                        <img src={item.image_original_url ? item.image_original_url : item.asset_contract.image_url} className='h-full w-full rounded-t-xl' style={{ display: loading ? 'none' : 'block'}} onLoad={() => setLoading(false)}/>
+                    
+                    
                 </div>
                <div className='h-28  flex flex-col border-b-2 border-black'>
                 
