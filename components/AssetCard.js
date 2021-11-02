@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import useSWR from 'swr'
 import Pagination from './Pagination'
@@ -10,6 +10,7 @@ const fetcher = (url) => {
        }
 
 export default function AssetCard({gas, assets, collection, custom, setCustom, userAssets, address, coll}) {
+    const topRef = useRef()
 
     const [pageIndex, setPageIndex] = useState(0)
 
@@ -30,10 +31,10 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
     
     return (
         
-        <div className='flex flex-col overflow-y-hidden mainPage'>
+        <div className='flex flex-col overflow-y-hidden mainPage relative' ref={topRef}>
             <div className='flex gap-x-10 ml-4 mt-4 flex-wrap flex-4 gap-y-4 justify-center'>
                 {data.assets.map((item, index) => (
-            <div className='border h-auto w-60 rounded-t-xl rounded-xl shadow-xl'>
+            <div className='border w-60 rounded-t-xl rounded-xl shadow-xl descBackground'>
                 <div className='h-60  rounded-t-xl'>
                     <img src={item.image_original_url ? item.image_original_url : item.asset_contract.image_url} className='h-full w-full rounded-t-xl'/>
                 </div>
@@ -65,18 +66,21 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
            ))} 
             </div>
            
-       
-        <div className='mt-2 fixed bottom-0 pb-2 ml-custom paginationBar'>
-                
-                <Pagination 
-                    data={data}
-                    pageIndex={pageIndex}
-                    setPageIndex={setPageIndex}
-                    pageNumber={pageNumber}
-                    setPageNumber={setPageNumber}
-                />
-                
-                </div>
+       <div className='flex justify-center'>
+           <div className='mt-2 absolute bottom-0 pb-2  paginationBar'>
+                    
+                    <Pagination 
+                        data={data}
+                        pageIndex={pageIndex}
+                        setPageIndex={setPageIndex}
+                        pageNumber={pageNumber}
+                        setPageNumber={setPageNumber}
+                        topRef={topRef}
+                    />
+                    
+                    </div>
+       </div>
+            
         
         
         </div>

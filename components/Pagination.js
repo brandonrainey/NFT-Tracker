@@ -6,18 +6,25 @@ export default function Pagination({
   setPageIndex,
   pageNumber,
   setPageNumber,
+  topRef
 }) {
   const [disabledPrev, setDisabledPrev] = useState(true);
   const [disabledNext, setDisabledNext] = useState(false);
 
+  const scrollToTop = () =>{
+    topRef.current.scrollIntoView()
+  };
+
   const handleClickPrev = () => {
     setPageIndex(pageIndex - 12);
     setPageNumber(pageNumber - 1);
+    
   };
 
   const handleClickNext = () => {
     setPageNumber(pageNumber + 1);
     setPageIndex(pageIndex + 12);
+    
   };
 
   useEffect(() => {
@@ -33,8 +40,8 @@ export default function Pagination({
     }
 
     // setCustom(!custom)
-
-    // window.scrollTo(0, 0)
+    scrollToTop()
+    
   }, [data]);
 
   return (

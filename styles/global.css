@@ -3,18 +3,35 @@
 @tailwind utilities;
 
 html {
-    background-color: rgba(243, 244, 246)
+    background-color: rgb(55, 70, 100)
+}
+
+.headerTitle {
+    background: linear-gradient(0deg, rgba(17,24,36,1) 0%, rgba(29,66,142,1) 100%);
+    color: white;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
+
+.descBackground {
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    height: 26.4rem;
+}
+
+.mainPage {
+    height: 58rem;
 }
 
 @media (max-width: 500px) {
     .paginationBar {
-        margin-left: 35%;
+        position: fixed;
+        bottom: 0px;
     
     }
 
     .mainPage {
         
-        height: 37rem;
+        height: 39rem;
         overflow-y: scroll;
     }
 
