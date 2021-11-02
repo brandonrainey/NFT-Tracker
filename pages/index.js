@@ -78,7 +78,7 @@ const getCollection = async () => {
 
   
   return (
-    <div className='overflow-hidden'> 
+    <div className='overflow-hidden  h-full w-full'> 
       
       <TopMenu 
         gas={gas}
@@ -96,16 +96,10 @@ const getCollection = async () => {
         setColl={setColl}
         
       />
-      <div className='flex overflow-hidden justify-center'>
+      <div className='flex overflow-hidden justify-center mainPageWrapper'>
         
-        <div>
-           <MainContent 
-        gas={gas}
-        assets={assets}
-        collection={collection}
-        eth={eth}
-        address={address}
-      />
+        
+           
       <AssetCard 
         gas={gas}
         assets={assets}
@@ -120,7 +114,7 @@ const getCollection = async () => {
         // newData={newData}
         // setNewData={setNewData}
       />
-        </div>
+        
          
         
       

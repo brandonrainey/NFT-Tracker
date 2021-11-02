@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    background-color: rgba(243, 244, 246)
+}
+
+@media (max-width: 500px) {
+    .paginationBar {
+        margin-left: 9rem;
+    
+    }
+
+    .mainPage {
+        
+        height: 38rem;
+        overflow-y: scroll;
+    }
+
+    .headerWrapper {
+        flex-direction: column;
+    }
+
+    .headerTitle {
+        width: 100%;
+    }
+
+    .headerInfo {
+        width: 100%;
+    }
+
+    .inputBar {
+        width: 9rem;
+        margin-top: 1rem;
+    }
+
+}

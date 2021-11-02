@@ -15,7 +15,7 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
 
     const [pageNumber, setPageNumber] = useState(1)
 
-    const { data, error } = useSWR(`https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=${pageIndex}&limit=8`, fetcher)
+    const { data, error } = useSWR(`https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=${pageIndex}&limit=12`, fetcher)
 
       if (error) return <div>failed to load</div>
       if (!data) return <div>loading...</div>
@@ -30,10 +30,10 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
     
     return (
         
-        <div className='flex flex-col overflow-y-hidden'>
-            <div className='flex gap-x-10 ml-4 mt-4 flex-wrap flex-4 gap-y-14 justify-center'>
+        <div className='flex flex-col overflow-y-hidden mainPage'>
+            <div className='flex gap-x-10 ml-4 mt-4 flex-wrap flex-4 gap-y-4 justify-center'>
                 {data.assets.map((item, index) => (
-            <div className='border h-96 w-60 rounded-t-xl'>
+            <div className='border h-auto w-60 rounded-t-xl rounded-xl shadow-xl'>
                 <div className='h-60  rounded-t-xl'>
                     <img src={item.image_original_url ? item.image_original_url : item.asset_contract.image_url} className='h-full w-full rounded-t-xl'/>
                 </div>
@@ -66,7 +66,7 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
             </div>
            
        
-        <div className='mt-14'>
+        <div className='mt-2 fixed bottom-0 pb-2 ml-custom paginationBar'>
                 
                 <Pagination 
                     data={data}
