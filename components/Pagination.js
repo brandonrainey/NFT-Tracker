@@ -19,13 +19,13 @@ export default function Pagination({
   const handleClickPrev = () => {
     setPageIndex(pageIndex - 12);
     setPageNumber(pageNumber - 1);
-    
+    scrollToTop()
   };
 
   const handleClickNext = () => {
     setPageNumber(pageNumber + 1);
     setPageIndex(pageIndex + 12);
-    
+    scrollToTop()
   };
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Pagination({
     }
 
     
-    scrollToTop()
+    
     
   }, [data]);
 
