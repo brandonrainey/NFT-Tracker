@@ -8,13 +8,13 @@ html {
 
 @media (max-width: 500px) {
     .paginationBar {
-        margin-left: 9rem;
+        margin-left: 35%;
     
     }
 
     .mainPage {
         
-        height: 38rem;
+        height: 37rem;
         overflow-y: scroll;
     }
 
@@ -31,7 +31,7 @@ html {
     }
 
     .inputBar {
-        width: 9rem;
+        width: 7.6rem;
         margin-top: 1rem;
     }
 
