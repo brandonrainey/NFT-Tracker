@@ -24,7 +24,7 @@ html {
 
 @media (max-width: 500px) {
 
-    html {
+    html, body {
         overflow-y: hidden;
     }
     .paginationBar {
