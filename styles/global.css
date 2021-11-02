@@ -24,14 +24,13 @@ html {
 
 @media (max-width: 500px) {
     .paginationBar {
-        position: fixed;
-        bottom: 0px;
+        position: initial;
     
     }
 
     .mainPage {
         
-        height: 39rem;
+        height: 42rem;
         overflow-y: scroll;
     }
 
@@ -50,6 +49,10 @@ html {
     .inputBar {
         width: 7rem;
         margin-top: 1rem;
+    }
+
+    .paginationWrapper {
+        
     }
 
 }

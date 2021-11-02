@@ -12,6 +12,10 @@ const fetcher = (url) => {
 export default function AssetCard({gas, assets, collection, custom, setCustom, userAssets, address, coll}) {
     const topRef = useRef()
 
+    const scrollToTop = () =>{
+        topRef.current.scrollIntoView({ block: 'start' })
+      };
+
     const [pageIndex, setPageIndex] = useState(0)
 
     const [pageNumber, setPageNumber] = useState(1)
@@ -23,16 +27,16 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
       
     
 
-    //  useEffect(() => {
-        
-    //     //setNewData(data)
-    //     //console.log(newData)
-    //  },[address, custom])
+    //   useEffect(() => {
+    //     scrollToTop()
+    //      //setNewData(data)
+    //      //console.log(newData)
+    //   },[custom])
     
     return (
         
-        <div className='flex flex-col overflow-y-hidden mainPage relative' ref={topRef}>
-            <div className='flex gap-x-10 ml-4 mt-4 flex-wrap flex-4 gap-y-4 justify-center'>
+        <div className='flex flex-col overflow-y-hidden mainPage relative' >
+            <div className='flex gap-x-10 ml-4 mt-4 flex-wrap flex-4 gap-y-4 justify-center' ref={topRef}>
                 {data.assets.map((item, index) => (
             <div className='border w-60 rounded-t-xl rounded-xl shadow-xl descBackground'>
                 <div className='h-60  rounded-t-xl'>
@@ -66,7 +70,7 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
            ))} 
             </div>
            
-       <div className='flex justify-center'>
+       <div className='flex justify-center paginationWrapper'>
            <div className='mt-2 absolute bottom-0 pb-2  paginationBar'>
                     
                     <Pagination 
@@ -76,6 +80,9 @@ export default function AssetCard({gas, assets, collection, custom, setCustom, u
                         pageNumber={pageNumber}
                         setPageNumber={setPageNumber}
                         topRef={topRef}
+                        setCustom={setCustom}
+                        custom={custom}
+                        scrollToTop={scrollToTop}
                     />
                     
                     </div>

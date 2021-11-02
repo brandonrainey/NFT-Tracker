@@ -6,14 +6,15 @@ export default function Pagination({
   setPageIndex,
   pageNumber,
   setPageNumber,
-  topRef
+  topRef,
+  setCustom,
+  custom, 
+  scrollToTop
 }) {
   const [disabledPrev, setDisabledPrev] = useState(true);
   const [disabledNext, setDisabledNext] = useState(false);
 
-  const scrollToTop = () =>{
-    topRef.current.scrollIntoView()
-  };
+  
 
   const handleClickPrev = () => {
     setPageIndex(pageIndex - 12);
@@ -39,7 +40,7 @@ export default function Pagination({
       setDisabledPrev(true);
     }
 
-    // setCustom(!custom)
+    
     scrollToTop()
     
   }, [data]);
