@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import MainContent from '../components/MainContent'
-import SideMenu from '../components/SideMenu'
 import axios from 'axios'
 
 import TopMenu from '../components/TopMenu'
@@ -8,75 +6,37 @@ import AssetCard from '../components/AssetCard'
 import useSWR from 'swr'
 
 
-const fetcher = (url) => {
-    
-  return axios.get(url).then(res => res.data)
-  
-     }
-
 export default function Home({gas, assets, collection, eth}) {
   const [custom, setCustom] = useState(false)
   
-const [address, setAddress] = useState('0x7f1884d93061ed1f44b65d537e782781bc728d58')
+  const [address, setAddress] = useState('0x7f1884d93061ed1f44b65d537e782781bc728d58')
 
   const [userAssets, setUserAssets] = useState(assets)
 
-  // const [newData, setNewData] = useState()
+  const [myData, setMyData] = useState()
 
-  // const [renderData, setRenderData] = useState()
+  const [floors, setFloors] = useState()
 
-  const [coll, setColl] = useState([])
+  // remember to add back page index for offset
+  async function getAssets() {
+    await axios.get(`https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=0&limit=12`)
+       .then((res) => setMyData(res.data))
+ }
 
-  
-
-  const { data, error } = useSWR(`https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=0&limit=8`, fetcher)
-
-  if (error) return <div>failed to load</div>
-  if (!data) return <div>loading...</div>
-  
-
-//   const getAddress = async () => {
-    
-    
-//     await axios.get(`https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=0&limit=20`)
-//         .then((response) => {
-//             setUserAssets(response.data)
-            
-            
-//         })
-//         .catch((error) => {
-//           console.log(error)
-//         })
-// }
-
-const getCollection = async () => {
-  
-  setColl([])
-  assets.assets.map((item) => {
-    axios.get(`https://api.opensea.io/api/v1/collections?asset_owner=${item.creator.address}&offset=0&limit=300`)
-      .then((response) => {
-        
-        
-        let newColl = response.data[0].stats.floor_price ? response.data[0].stats.floor_price : 'n/a'
-        console.log(newColl)
-        newColl === undefined ? 'N/A' : newColl = response.data[0].stats.floor_price
-        setColl(coll => [...coll, newColl])
-        
-        
-      })
+ function getFloor() {
+  myData.assets.map((item) => {
+    axios.get(`https://api.opensea.io/api/v1/collection/${item.collection.name}/stats`).then((res) => setFloors((prev) => [...prev, res.status.floor_price]))
   })
-  
 }
 
-// useEffect(() => {
-//   //newData ? setRenderData(newData) : setRenderData(assets)
-  
-//    //getCollection()
-  
-  
-// },[])
 
-  
+  useEffect(() => {
+    getAssets()
+    myData != undefined ? getFloor() : null
+    // getFloor()
+  }, [address])
+
+
   return (
     <div className='overflow-hidden  h-full w-full'> 
       
@@ -91,14 +51,9 @@ const getCollection = async () => {
         // getAddress={getAddress}
         userAssets={userAssets}
         setUserAssets={setUserAssets}
-        getCollection={getCollection}
-        coll={coll}
-        setColl={setColl}
         
       />
       <div className='flex overflow-hidden justify-center mainPageWrapper'>
-        
-        
            
       <AssetCard 
         gas={gas}
@@ -110,18 +65,12 @@ const getCollection = async () => {
         userAssets={userAssets}
         setUserAssets={setUserAssets}
         address={address}
-        coll={coll}
-        // newData={newData}
-        // setNewData={setNewData}
+        myData={myData}
+        getFloor={getFloor}
+        floors={floors}
       />
-        
-         
-        
-      
       </div>
         
-      
-      
     </div>
   )
 }

@@ -10,7 +10,7 @@ module.exports = {
     },
     flex: {
       '3': '1 0 33%',
-      '4': '0.9 0 25%',
+      '4': '0.7 0 25%',
     },
     fontFamily: {
       'custom': ['Signika Negative'],

@@ -6,8 +6,11 @@ export default function TopMenu({
   custom,
   setCustom,
   setAddress,
+  address
 }) {
   const [inputValue, setInputValue] = useState("");
+
+  const [wallet, setWallet] = useState('')
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -15,28 +18,41 @@ export default function TopMenu({
     setAddress(inputValue);
   }
 
-  //  useEffect(() => {
-  //     getCollection()
-  //  },[address, custom])
+   useEffect(() => {
+      setWallet(inputValue)
+   }, [address])
   return (
     <div className="flex headerWrapper">
-      <div className="bg-indigo-400 w-2/6 h-20 font-bold text-4xl text-center headerTitle">
-        NFT-TRACKER
-      </div>
-
-      <div className="bg-gray-400 w-5/6 px-8 pt-2 headerInfo">
-        <div className="flex">
+     
+      {/* gas and ETH price/ wallet */}
+      <div className="bg-gray-400 w-2/6 px-8 pt-2 headerInfo flex justify-center items-center">
+        <div className="flex flex-col">
           <div className="font-semibold">
             {`Gas: ${gas.result.ProposeGasPrice} gwei`}
           </div>
 
-          <div className="ml-auto font-semibold">
+          <div className="font-semibold">
             {`Current ETH price: $${eth.result.ethusd}`}
+          </div>
+
+          <div className='font-semibold'>
+            {`Current Wallet: ${wallet}`}
           </div>
         </div>
 
-        <div className="bg-gray-400">
-          <form onSubmit={handleSubmit}>
+       
+      </div>
+
+      {/* title */}
+      <div className="bg-indigo-400 w-2/6 h-36 font-bold text-5xl text-center headerTitle">
+        NFT-TRACKER
+      </div>
+
+      {/* address bar */}
+      <div className='flex w-2/6 items-center headerAddressBar'>
+         <div className="bg-gray-400 h-full w-full flex justify-center items-center headerAddress">
+           <div>
+             <form onSubmit={handleSubmit}>
             <label className="font-semibold">ETH address:</label>
             <input
               value={inputValue}
@@ -50,6 +66,8 @@ export default function TopMenu({
               Enter
             </button>
           </form>
+           </div>
+          
         </div>
       </div>
     </div>
