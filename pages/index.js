@@ -11,7 +11,7 @@ export default function Home({gas, assets, collection, eth}) {
   
   const [address, setAddress] = useState('0x7f1884d93061ed1f44b65d537e782781bc728d58')
 
-  const [userAssets, setUserAssets] = useState(assets)
+  // const [userAssets, setUserAssets] = useState(assets)
 
   const [myData, setMyData] = useState()
 
@@ -31,12 +31,13 @@ export default function Home({gas, assets, collection, eth}) {
 
 
   useEffect(() => {
-    getAssets()
+    // getAssets()
     myData != undefined ? getFloor() : null
     // getFloor()
+    
   }, [address])
 
-
+// getAssets()
   return (
     <div className='overflow-hidden  h-full w-full'> 
       
@@ -49,8 +50,8 @@ export default function Home({gas, assets, collection, eth}) {
         address={address}
         setAddress={setAddress}
         // getAddress={getAddress}
-        userAssets={userAssets}
-        setUserAssets={setUserAssets}
+        // userAssets={userAssets}
+        // setUserAssets={setUserAssets}
         
       />
       <div className='flex overflow-hidden justify-center mainPageWrapper'>
@@ -62,12 +63,13 @@ export default function Home({gas, assets, collection, eth}) {
         eth={eth}
         custom={custom}
         setCustom={setCustom}
-        userAssets={userAssets}
-        setUserAssets={setUserAssets}
+        // userAssets={userAssets}
+        // setUserAssets={setUserAssets}
         address={address}
         myData={myData}
         getFloor={getFloor}
         floors={floors}
+
       />
       </div>
         

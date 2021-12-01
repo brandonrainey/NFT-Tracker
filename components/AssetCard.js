@@ -17,6 +17,7 @@ export default function AssetCard({
   myData,
   getFloor,
   floors,
+  assets,
 }) {
   const topRef = useRef();
 
@@ -44,10 +45,8 @@ export default function AssetCard({
   
 
     // useEffect(() => {
-    //     // getAssets()
-    // },[])
-//   getAssets()
-//   console.log(data);
+
+    // }, [])
 console.log(myData)
   return (
     <div className="flex flex-col overflow-y-hidden mainPage relative">
